@@ -67,3 +67,60 @@ App
 - [Dynamic Routing](https://nextjs.org/docs/pages/building-your-application/routing/dynamic-routes)
 - [Incremental Static Regeneration](https://nextjs.org/docs/app/guides/incremental-static-regeneration)
 
+Example:
+   - users
+        - [id]
+            - page.tsx
+Now how to capture the dynamic part of the URL (e.g., `id`):
+
+- Method: Using object destructuring in the component props:
+```tsx
+const UserPage = ({ params }: {params : {id: string}}) => {
+  const { id } = params;
+  return <div>User ID: {id}</div>;
+};
+export default UserPage;
+```
+
+
+## 07-Catch-All Routes
+- [Catch-All Routes](https://nextjs.org/docs/app/api-reference/file-conventions/dynamic-routes#catch-all-segments)
+- Example:
+   - products
+        - [...slug]
+            - page.tsx
+- Inside the `app` directory, create a new folder named `products`.
+- Inside the `products` folder, create a folder named `[...slug]`.
+- Inside the `[...slug]` folder, create a `page.tsx` file that will render information based on the dynamic segments from the URL.
+- Inside `page.tsx`, display the entire `slug` array, showing each segment of the URL dynamically.
+
+
+## 08-Not Found Page
+- [Not Found Page](https://nextjs.org/docs/app/api-reference/file-conventions/not-found)
+- [Blog](https://victoreke.com/blog/how-to-create-a-custom-404-error-page-in-nextjs-13)
+
+
+## 09-Redirects
+## 10-Layouts
+- [Layouts](https://www.builder.io/blog/layouts-in-nextjs-14-visual)
+- why to use layouts?
+    - Layouts are used to share common UI elements across multiple pages, such as headers, footers, and sidebars.
+    - They help in maintaining a consistent look and feel throughout the application.
+
+## 11-Loading
+## 12-Error Handling
+## 13-Template
+- [Template](https://www.builder.io/blog/nextjs-14-layouts-templates)
+- why do even need templates when I have layouts ?
+    - a template is fully remounted every time a user navigates to a new page
+    - a layout will not remount when navigating to a new page, it will only update the content inside it.
+- Example:
+    - /dashboard
+        - layout.tsx
+        - template.tsx
+        - page.tsx
+        - /settings
+            - page.tsx
+    - In this example, the `template.tsx` will be remounted every time the user navigates to a new page within the `/dashboard` route, while the `layout.tsx` will remain mounted.
+
+Note📝:A single route can effectively contain both a layout and a template, with the layout serving as an outer shell that encases the template within it.
